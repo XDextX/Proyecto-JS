@@ -92,6 +92,9 @@ function validatePassword(password) {
 	}
 }
 function validatePass(pass) {
+	if (pass == '') {
+		return false;
+	}
 	let len = pass.length % 2 == 0 ? pass.length : pass.length - 1;
 	let valid = true;
 	for (let i = 0; i < len - 1; i++) {
