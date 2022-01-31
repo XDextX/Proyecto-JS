@@ -69,6 +69,7 @@ function login() {
 
 	// Si el email y la contraseña son correctos ambos se llama a la pestaña menu
 	if (emailValido == 2 && passwordValida == 2) {
+		sessionStorage.setItem('Usuario', username);
 		window.location = 'menu.html';
 	}
 }
