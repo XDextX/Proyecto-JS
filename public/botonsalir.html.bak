@@ -1,0 +1,24 @@
+<html>
+        <head>
+            <title>Ventana Secundaria</title>
+            <script>
+            function cerrarse(){
+				let text;
+				if (confirm("Desea salir?") == true) {
+				  text = "You pressed OK!";
+				  window.close()
+				} else {
+				  text = "You canceled!";
+				}
+            }
+            </script>
+        </head>
+        <body>
+            <h1>
+                Menu
+            </h1>
+            <form>
+                <input type=button value="Salir" onclick="cerrarse()">
+            </form>
+        </body>
+    </html>
