@@ -4,9 +4,18 @@ function validateLogin() {
 	if (!user) {
 		window.location.replace('../index.html');
 	} else {
-		window.onbeforeunload = blockNavigation;
+		if (
+			sessionStorage.getItem('nav') != 't' &&
+			sessionStorage.getItem('prev') != window.location.href
+		) {
+			window.location = '/ventana_de_fallo.html';
+		} else {
+			sessionStorage.setItem('nav', 'f');
+			sessionStorage.setItem('prev', location.href);
+		}
 	}
 }
+
 function blockNavigation(e) {
 	window.location.href = window.history.previous.href;
 	console.log(window.history.previous.href);
