@@ -22,11 +22,10 @@ function mostrarConstrasensa() {
 
 // Variable de conteo
 var cont = '3';
-
+function getUser(username) {}
 // Funcion principal de login del programa la cual valida el email y la contraseña
 function login() {
 	var username = document.getElementById('user').value;
-	sessionStorage.setItem('glbvalor', username);
 	var password = document.getElementById('pass').value;
 	var validacionEmail =
 		/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -70,6 +69,7 @@ function login() {
 
 	// Si el email y la contraseña son correctos ambos se llama a la pestaña menu
 	if (emailValido == 2 && passwordValida == 2) {
+		sessionStorage.setItem('glbvalor', username);
 		window.location = './home/menu.html';
 		sessionStorage.setItem('nav', 't');
 	}
