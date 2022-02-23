@@ -6,7 +6,7 @@ var EntryPoints = require(__dirname + '/libs/EntryPoints');
 
 app.use(express.static('public'));
 app.set('port', '3005');
-//app.use('/EntryPoints',EntryPoints);
+app.use('/EntryPoints', EntryPoints);
 app.disable('x-powered-by');
 
 server.listen(app.get('port'), function () {
