@@ -65,12 +65,13 @@ function login() {
 	// Si el contador es igual a 0 se llama a una ventana externa de fallo que le indica al usuario que el
 	// limite de intentos termino
 	if (cont == 0) {
-		window.location = 'ventana de fallo.html';
+		window.location = 'ventana_de_fallo.html';
 	}
 
 	// Si el email y la contraseña son correctos ambos se llama a la pestaña menu
 	if (emailValido == 2 && passwordValida == 2) {
 		window.location = './home/menu.html';
+		sessionStorage.setItem('nav', 't');
 	}
 }
 
