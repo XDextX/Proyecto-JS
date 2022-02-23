@@ -1,28 +1,65 @@
+// by FVN-INVENIO
+
 var express = require('express');
-var router	= express.Router();
+const { send } = require('express/lib/response');
+var router = express.Router();
 
+// for POSTGRESQL=============================================================================
 
-
-router.get('/db', function (req, res) {
-
-	sql.connect(config, function (err) {
-		if (err){ console.log(err)};
-	});
-
-	sql.connect(config, function (err) {
-		if (err){ console.log(err)};
-		var request = new sql.Request();
-		request.query('select * from t1', function (err, recordset) {
-			if (err){ console.log(err)};
-		res.send(recordset);
-		});
-	});	
+const { Pool } = require('pg');
+const pool = new Pool({
+	user: 'new',
+	password: '1234',
+	database: 'ArturoDB',
+	host: 'localhost',
+	port: 5432,
+	max: 20,
+	idleTimeoutMillis: 30000,
+	connectionTimeoutMillis: 2000,
 });
 
+// ==================================================== END VARIABLES DIVISION =========================================================
 
+//========================================================= FUNCTION DIVISION =======================================================
 
+// rutina DEMO para hacer pruebas de AJAX
 
+router.get('/demorutina', function (req, res) {
+	var sql = 'select * from public."USUARIOS"';
 
+	pool.connect((err, client, release) => {
+		if (err) {
+			res.send(err.stack);
+			return console.error('Error acquiring client', err.stack);
+		}
+		client.query(sql, (err, result) => {
+			release();
+			if (err) {
+				return console.error('Error executing query', err.stack);
+			}
+			res.send(result.rows);
+		});
+	});
+});
+router.get('/demorutina2', function (req, res) {
+	var sql = 'select * from public."USUARIOS"';
 
+	pool.connect((err, client, release) => {
+		if (err) {
+			res.send(err.stack);
+			return console.error('Error acquiring client', err.stack);
+		}
+		client.query(sql, (err, result) => {
+			release();
+			if (err) {
+				return console.error('Error executing query', err.stack);
+			}
+			res.send(result.rows);
+		});
+	});
+});
+// ==============================================
+
+// ===============================================================END ENTRY POINT DIVISION =================================================
 
 module.exports = router;
