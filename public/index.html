@@ -1,129 +1,51 @@
 <!DOCTYPE html>
 <html>
-<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
-<title>PROYECTO
-</title>
+	<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
+	<title>PROYECTO</title>
+	<head>
+		<link
+			rel="stylesheet"
+			href="codebase/webix.css"
+			type="text/css"
+			media="screen"
+			charset="utf-8"
+		/>
+		<script
+			src="codebase/webix.js"
+			type="text/javascript"
+			charset="utf-8"
+		></script>
 
-<head>
-	<script type="text/javascript">
-		// Asinacion de nombres por de defecto para que el usuario
-		// pueda saber la funcion de los campos
-		
-		//document.getElementById("user").value = "Username";
-		//document.getElementById("pass").value = "Password";
-		//---------------------------------------------------
-		
-		// Fucion para motra o ocultar la contraseña por medio de un boton
-		// con el simbolo de (o) como identificador 
-		
-		function mostrarConstraseña() {
-			var tipo = document.getElementById("pass");
-			if (tipo.type == "password") {
-				tipo.type = "text";
-			} else {
-				tipo.type = "password";
-			};
-		};
-		
-		// Variable de conteo
-		var cont = "3" ;
-		
-		// Funcion principal de login del programa la cual valida el email y la contraseña
-		function login() {
-			var username = document.getElementById("user").value;
-			var password = document.getElementById("pass").value;
-            var validacionEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-            var Valido = validacionEmail.test(username);
-			
-			// Variables llaves 
-			var a = 0 ;
-			var b = 0 ;
-			
-			// Si el email es valido la alerta al usuario e internamente la variable llave se vuelve un 2 
-            if (Valido == true){
-                alert("La dirección de email " + username + " es correcta.");
-				a = 2 ;
-				
-            }
-			// Si es incorrecto alerta al usario y a la consola y la variable llave se vuelve un 1 
-            else{
-				console.log("Error de email");
-                alert("La dirección de email es incorrecta.");
-				a = 1;
-				
-            };
-			// Si la contraseña es correcta la guarda en la memoria y la variable llave se vuelve un 2
-			if (validatePassword(password)) { // si es verdadero guardar en memoria
-				console.log("Guardando en memoria...");
-				b = 2 ;
-				
-			//	Si la contraseña es incorrecta alerta a la consola y al usuario y la variable llave se vuelve un 1
-			} else {
-				console.log("Error de contraseña");
-				alert("La contraseña es incorrecta.");
-				b = 1 ;	
-			};
-			
-				// Si el email o la contraseña estan erroneas por medio de las llaver se evalua y el contador
-				// disminulle y muestra el numero de intentos restantes 
-				if  (a == 1 || b == 1){
-					cont -- ;
-					
-					// La aleta al usuario se muertra hasta que le quede 1 intento
-					if (cont != 0){
-					alert("Error con sus datos intetos retantes " + cont)
-					};
-				};
-				
-			// Si el contador es igual a 0 se llama a una ventana externa de fallo que le indica al usuario que el 
-			// limite de intentos termino
-			if (cont == 0 ){
-				window.location='ventana de fallo.html';
-			};
-			
-			// Si el email y la contraseña son correctos ambos se llama a la pestaña menu 
-			if ((a == 2)&&(b ==2 )){	
-				window.location='menu.html';
-			};
-			
-		};
-		
-		// Proseso para la validacion de la contraseña
-		function validatePassword(password) {
-			var parejas = obtenerParejas(password);
-			for (var i = 0; i < parejas.length; i++) {
-				var numeros = parejas[i].split("");
-				//console.log(numeros)
-				//console.log(numeros[0] % 2)
-				if (numeros[0] % 2 == 0) { // si no es impar
-					if (numeros[0] * 2 == numeros[1]) {
-						return true;
-					};
-				};
-			};
-		};
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	</head>
+	<!-- decoracion del fondo de la pantalla y distribucion de los botones y input -->
+	<body style="background-color: #edbb99">
+		<h1>Login Proyecto</h1>
 
-		function obtenerParejas(password) {
-			return password.match(/..|./g);
-		};
-
-	</script>
-</head>
-<!-- decoracion del fondo de la pantalla y distribucion de los botones y input -->
-<body style="background-color:#EDBB99">
-	<h1>Login</h1>
-
-	<div id="contenedor">
-		<input type="email" id="user" name="username" size="30" placeholder="Username" required />
-		<br><br>
-		<input type="password" id="pass" name="passw" placeholder="Password" required/>
-		<button onclick="mostrarConstraseña()">(o)</button>
-		<br><br>
-		<p><a href="#">Forgot Your Password?</a></p>
-		<br>
-		<button onclick="login()">Login</button>
-		<br><br>
-	</div>
-</body>
-
+		<div id="contenedor">
+			<input
+				type="email"
+				id="user"
+				name="username"
+				size="30"
+				placeholder="Username"
+				required
+			/>
+			<br /><br />
+			<input
+				type="password"
+				id="pass"
+				name="passw"
+				placeholder="Password"
+				required
+			/>
+			<button id="vista">(o)</button>
+			<br /><br />
+			<br />
+			<button id="login">Login</button>
+			<br /><br />
+		</div>
+		<script src="./index.js"></script>
+	</body>
 </html>

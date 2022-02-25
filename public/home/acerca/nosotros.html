@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link
+			rel="stylesheet"
+			href="codebase/webix.css"
+			type="text/css"
+			media="screen"
+			charset="utf-8"
+		/>
+		<script
+			src="codebase/webix.js"
+			type="text/javascript"
+			charset="utf-8"
+		></script>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+		<title>Arturo:Nosotros</title>
+		<script src="../nav.js"></script>
+	</head>
+	<body style="background-color: #f5cba7">
+		<nav class="navegacion">
+			<button
+				class="navegacion__enlace navegacion__enlace--activo"
+				data-href="../menu.html"
+				onclick="navigate(this)"
+			>
+				Inicio
+			</button>
+			<button
+				class="navegacion__enlace"
+				data-href="../acerca/nosotros.html"
+				onclick="navigate(this)"
+			>
+				Nosotros
+			</button>
+			<button class="navegacion__enlace" data-href="#" id="btn_salir">
+				Salir
+			</button>
+			<span>
+				<span id="user"></span>
+				<span id="reloj"></span>
+			</span>
+		</nav>
+		<div class="widget"></div>
+		<script src="../reloj.js"></script>
+		<script src="../salir.js"></script>
+		<script src="../url-validator.js"></script>
+
+		<form id="pt">
+			<div>
+				<img src="../../img/f1.jpg" width="350" height="350" />
+
+				<span>
+					<p>Jeferson Soto Anchia</p>
+					<p>Edad = 19</p>
+					<p>Estudiante de Junior Developer</p>
+					<p>Originario de</p>
+					<p>Tilaran</p>
+				</span>
+			</div>
+			<div>
+				<img src="../../img/f2.jpg" width="350" height="350" />
+				<p>David Gutierrez Guzman</p>
+				<p>Edad = 19</p>
+				<p>Estudiante de Junior Developer</p>
+				<p>Originario de Moravia</p>
+			</div>
+			<div>
+				<img src="../../img/fotomia.jfif" width="350" height="350" />
+				<p>German Montero Ramirez</p>
+				<p>Edad = 25</p>
+				<p>Estudiante de Junior Developer</p>
+				<p>Originario de Tilaran</p>
+			</div>
+			<div>
+				<img src="../../img/andrecito.jpg" width="350" height="350" />
+				<p>Andres Monestel Cruz</p>
+				<p>Edad = 23</p>
+				<p>Estudiante de Junior Developer</p>
+				<p>Originario de Tilaran</p>
+			</div>
+			<div>
+				<img src="../../img/sniker.png" width="350" height="350" />
+				<div>
+					<p>Jose Pablo Monestel Cruz</p>
+					<p>Edad = 20</p>
+					<p>Estudiante de Junior Developer</p>
+					<p>Originario de Tilaran</p>
+				</div>
+			</div>
+		</form>
+		<script src="nosotros.js"></script>
+	</body>
+</html>
