@@ -7,10 +7,13 @@
 
 // Fucion para motra o ocultar la contraseña por medio de un boton
 // con el simbolo de (o) como identificador
+import { getData } from './test';
 let btnLogin = document.getElementById('login');
-btnLogin.addEventListener('click', login);
 let btnVista = document.getElementById('vista');
+let inputUsername = document.getElementById('user');
+let inputpassword = document.getElementById('pass');
 btnVista.addEventListener('click', mostrarConstrasensa);
+btnLogin.addEventListener('click', login);
 function mostrarConstrasensa() {
 	var tipo = document.getElementById('pass');
 	if (tipo.type == 'password') {
@@ -19,7 +22,10 @@ function mostrarConstrasensa() {
 		tipo.type = 'password';
 	}
 }
-
+function login2() {
+	let username = inputUsername.value;
+	let password = inputpassword.value;
+}
 // Variable de conteo
 var cont = '3';
 function getUser(username) {}
