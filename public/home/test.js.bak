@@ -16,7 +16,7 @@ async function getData(direction, params = {}) {
 		url += '?';
 		Object.entries(params).forEach((entry) => {
 			const [key, value] = entry;
-			url += `${key}=${value}&`;
+			url += `${key}=${value}`;
 		});
 	}
 	await webix.ajax(url, (text, data) => {

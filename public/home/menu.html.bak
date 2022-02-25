@@ -2,9 +2,6 @@
 <html>
 	<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
 	<head>
-	<link rel="stylesheet" href="codebase/webix.css" type="text/css" media="screen" charset="utf-8">
-    <script src="codebase/webix.js" type="text/javascript" charset="utf-8"></script>
-
 		<link
 			rel="stylesheet"
 			href="/codebase/webix.css"
