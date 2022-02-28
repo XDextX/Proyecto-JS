@@ -12,8 +12,9 @@ function testConection() {
  */
 async function getData(direction, params = {}) {
 	let url = direction;
-	let result = {};
+	let result = [];
 	if (params == {}) {
+		//demoritna?usuario=pepe&clave=1234&
 	} else {
 		url += '?';
 		Object.entries(params).forEach((entry) => {
