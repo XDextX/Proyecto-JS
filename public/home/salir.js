@@ -3,7 +3,7 @@ function cerrarse() {
 	let text;
 	if (confirm('Desea salir?') == true) {
 		text = 'You pressed OK!';
-		sessionStorage.removeItem('glbvalor');
+		sessionStorage.removeItem('user');
 		window.location = '../index.html';
 	} else {
 		text = 'You canceled!';

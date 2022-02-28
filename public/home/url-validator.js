@@ -1,6 +1,6 @@
 validateLogin();
 function validateLogin() {
-	let user = sessionStorage.getItem('glbvalor');
+	let user = JSON.parse(sessionStorage.getItem('user'));
 	if (!user) {
 		window.location.replace('../index.html');
 	} else {

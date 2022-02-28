@@ -1,12 +1,11 @@
 // by FVN-INVENIO
 
-var express = require('express');
-const { send } = require('express/lib/response');
-var router = express.Router();
+import express from 'express';
+export const router = express.Router();
 
 // for POSTGRESQL=============================================================================
-
-const { Pool } = require('pg');
+import pkg from 'pg';
+const { Pool } = pkg;
 const pool = new Pool({
 	user: 'new',
 	password: '1234',
@@ -24,7 +23,7 @@ const pool = new Pool({
 
 // rutina DEMO para hacer pruebas de AJAX
 
-router.get('/demorutina', function (req, res) {
+router.get('/usuarios/all', function (req, res) {
 	var sql = 'select * from public."USUARIOS"';
 
 	pool.connect((err, client, release) => {
@@ -41,14 +40,10 @@ router.get('/demorutina', function (req, res) {
 		});
 	});
 });
-router.get('/demorutina2', function (req, res) {
-	var usuario = req.query.usuario;
-	var clave 	= req.query.password;
-	
-	var sql = 'select usuario from public.\"USUARIOS\" where usuario = \''+usuario+'\' and clave = \''+clave+'\'';
-	
-	
-
+router.get('/usuarios', function (req, res) {
+	let { usuario, clave } = req.query;
+	var sql = `select  usuario,tipousuario from "USUARIOS"
+where usuario='${usuario}' and clave='${clave}'`;
 	pool.connect((err, client, release) => {
 		if (err) {
 			res.send(err.stack);
@@ -66,5 +61,3 @@ router.get('/demorutina2', function (req, res) {
 // ==============================================
 
 // ===============================================================END ENTRY POINT DIVISION =================================================
-
-module.exports = router;
