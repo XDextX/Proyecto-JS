@@ -1,34 +1,94 @@
-// Asinacion de nombres por de defecto para que el usuario
-// pueda saber la funcion de los campos
+import test from './test.js';
+//-------Declaracion de constantes-----//
+const btnLogin = document.getElementById('login');
+const btnVista = document.getElementById('vista');
+const inputUsername = document.getElementById('user');
+const inputpassword = document.getElementById('pass');
+const validacionEmail =
+	/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+//-------------------------------------//
 
-//document.getElementById("user").value = "Username";
-//document.getElementById("pass").value = "Password";
-//---------------------------------------------------
-
-// Fucion para motra o ocultar la contraseña por medio de un boton
-// con el simbolo de (o) como identificador
-let btnLogin = document.getElementById('login');
-btnLogin.addEventListener('click', login);
-let btnVista = document.getElementById('vista');
+//-------Declaracion de eventos--------//
 btnVista.addEventListener('click', mostrarConstrasensa);
+btnLogin.addEventListener('click', login2);
+//-------------------------------------//
+
+/**
+ * Variable de conteo
+ */
+let cont = 3;
+
+//-------Declaracion de Funciones------//
+
+/**
+ * Fucion para motra o ocultar la contraseña por medio de un boton
+ * con el simbolo de (o) como identificador
+ */
 function mostrarConstrasensa() {
-	var tipo = document.getElementById('pass');
+	let tipo = document.getElementById('pass');
 	if (tipo.type == 'password') {
 		tipo.type = 'text';
 	} else {
 		tipo.type = 'password';
 	}
 }
+/**
+ * Segunda iteracion del Login extrayendo datos del backend
+ */
+async function login2() {
+	let username = inputUsername.value;
+	let password = inputpassword.value;
+	let valid = true;
+	if (!validacionEmail.test(username)) {
+		alert('Formato de email invalido');
+		valid = false;
+	} else {
+		let data = await getUser(username, password);
+		valid = validarData(data);
+	}
+	if (!valid) {
+		cont--;
+		if (cont > 0) {
+			return;
+		} else {
+			window.location = 'ventana_de_fallo.html';
+		}
+	}
+}
+/**
+ * Funcion que valida la informacion recibida del backend y redirecciona
+ * @param {object} data data recuperada del backend
+ * @returns {boolean}
+ */
+function validarData(data) {
+	if (data != {}) {
+		sessionStorage.setItem('user', JSON.stringify(data));
+		sessionStorage.setItem('nav', 't');
+		window.location = '/home/menu.html';
+	} else {
+		alert('Credenciales invalidas');
+		return false;
+	}
+	return true;
+}
 
-// Variable de conteo
-var cont = '3';
-function getUser(username) {}
+/**
+ * Encuentra un usuario que coincida con un username y password correcta
+ * @param {string} username Correo electronico del usuario
+ * @param {string} password Contraseña correspondiente del usuario
+ * @returns {Object} retorna el usuario y tipo de usuario, {} si no se encuentra
+ */
+async function getUser(username, password) {
+	return await test.getSingleData('entrypoints/usuarios', {
+		usuario: username,
+		clave: password,
+	});
+}
+
 // Funcion principal de login del programa la cual valida el email y la contraseña
 function login() {
 	var username = document.getElementById('user').value;
 	var password = document.getElementById('pass').value;
-	var validacionEmail =
-		/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
 	// Variables llaves
 	var emailValido = 2;
@@ -69,7 +129,7 @@ function login() {
 
 	// Si el email y la contraseña son correctos ambos se llama a la pestaña menu
 	if (emailValido == 2 && passwordValida == 2) {
-		sessionStorage.setItem('glbvalor', username);
+		sessionStorage.setItem('user', { usuario: username });
 		window.location = './home/menu.html';
 		sessionStorage.setItem('nav', 't');
 	}
