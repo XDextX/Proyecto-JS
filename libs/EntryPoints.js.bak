@@ -42,12 +42,10 @@ router.get('/demorutina', function (req, res) {
 	});
 });
 router.get('/demorutina2', function (req, res) {
+	var sql = 'select * from public."USUARIOS"';
+	
 	var usuario = req.query.usuario;
 	var clave 	= req.query.password;
-	
-	var sql = 'select usuario from public.\"USUARIOS\" where usuario = \''+usuario+'\' and clave = \''+clave+'\'';
-	
-	
 
 	pool.connect((err, client, release) => {
 		if (err) {

@@ -56,7 +56,7 @@ async function login() {
 
 	// Si el email o la contraseña estan erroneas por medio de las llaver se evalua y el contador
 	// disminulle y muestra el numero de intentos restantes
-	if (emailValido == 1 || credencialesvalidas == 1) {
+	if (emailValido == 1 || passwordValida == 1) {
 		cont--;
 	}
 
@@ -67,7 +67,7 @@ async function login() {
 	}
 
 	// Si el email y la contraseña son correctos ambos se llama a la pestaña menu
-	if (emailValido == 2 && credencialesvalidas == 2) {
+	if (emailValido == 2 && passwordValida == 2) {
 		sessionStorage.setItem('glbvalor', username);
 		window.location = './home/menu.html';
 		sessionStorage.setItem('nav', 't');
