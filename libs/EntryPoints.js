@@ -42,8 +42,29 @@ router.get('/usuarios/all', function (req, res) {
 });
 router.get('/usuarios', function (req, res) {
 	let { usuario, clave } = req.query;
+	//var usuario = req.query.usuario;
+	//var clave = req.query.clave;
 	var sql = `select  usuario,tipousuario from "USUARIOS"
 where usuario='${usuario}' and clave='${clave}'`;
+	pool.connect((err, client, release) => {
+		if (err) {
+			res.send(err.stack);
+			return console.error('Error acquiring client', err.stack);
+		}
+		client.query(sql, (err, result) => {
+			release();
+			if (err) {
+				return console.error('Error executing query', err.stack);
+			}
+			res.send(result.rows);
+		});
+	});
+});
+router.get('/usuarios/cambiar/acceso', function (req, res) {
+	let { usuario, clave } = req.query;
+	//var usuario = req.query.usuario;
+	//var clave = req.query.clave;
+	var sql = `UPDATE public."USUARIOS" set fechaultimoingreso=now() where clave='Jefferson@gmai.com'`;
 	pool.connect((err, client, release) => {
 		if (err) {
 			res.send(err.stack);
