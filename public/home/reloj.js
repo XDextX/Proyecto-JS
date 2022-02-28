@@ -45,7 +45,7 @@ function reloj() {
 	actualizarHora();
 	var intervalo = setInterval(actualizarHora, 1000);
 
-	var user = sessionStorage.getItem('glbvalor');
-	document.getElementById('user').innerText = 'Bienvenido' + ' ' + user;
+	var user = JSON.parse(sessionStorage.getItem('user'));
+	document.getElementById('user').innerText = 'Bienvenido' + ' ' + user.usuario;
 }
 reloj();

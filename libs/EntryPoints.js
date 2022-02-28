@@ -23,7 +23,7 @@ const pool = new Pool({
 
 // rutina DEMO para hacer pruebas de AJAX
 
-router.get('/demorutina', function (req, res) {
+router.get('/usuarios/all', function (req, res) {
 	var sql = 'select * from public."USUARIOS"';
 
 	pool.connect((err, client, release) => {
@@ -40,7 +40,7 @@ router.get('/demorutina', function (req, res) {
 		});
 	});
 });
-router.get('/demorutina2', function (req, res) {
+router.get('/usuarios', function (req, res) {
 	let { usuario, clave } = req.query;
 	var sql = `select  usuario,tipousuario from "USUARIOS"
 where usuario='${usuario}' and clave='${clave}'`;
