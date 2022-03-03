@@ -22,11 +22,10 @@ function mostrarConstrasensa() {
 
 // Variable de conteo
 var cont = '3';
-
+function getUser(username) {}
 // Funcion principal de login del programa la cual valida el email y la contraseña
-function login() {
+async function login() {
 	var username = document.getElementById('user').value;
-	sessionStorage.setItem('glbvalor', username);
 	var password = document.getElementById('pass').value;
 	var validacionEmail =
 		/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -40,76 +39,42 @@ function login() {
 	// Si es incorrecto alerta al usario y a la consola y la variable llave se vuelve un 1
 	if (!validacionEmail.test(username)) {
 		console.log('Error de email');
-		alert('La dirección de email es incorrecta.');
+		alert('El formato del email es incorrecta.');
 		emailValido = 1;
 	}
 	// Si la contraseña es correcta la guarda en la memoria y la variable llave se vuelve un 2
-	if (validatePass(password)) {
-		// si es verdadero guardar en memoria
-		console.log('Guardando en memoria...');
-		passwordValida = 2;
+	d = await getData('/EntryPoints/demorutina2',{usuario:username, password:password})
+	if (d.length > 0 ) {
+		credencialesvalidas = 2;
 
 		//	Si la contraseña es incorrecta alerta a la consola y al usuario y la variable llave se vuelve un 1
 	} else {
 		console.log('Error de contraseña');
-		alert('La contraseña es incorrecta.');
-		passwordValida = 1;
+		alert('Las credenciales son incorrectas');
+		credencialesvalidas = 1;
 	}
 
 	// Si el email o la contraseña estan erroneas por medio de las llaver se evalua y el contador
 	// disminulle y muestra el numero de intentos restantes
-	if (emailValido == 1 || passwordValida == 1) {
+	if (emailValido == 1 || credencialesvalidas == 1) {
 		cont--;
 	}
 
 	// Si el contador es igual a 0 se llama a una ventana externa de fallo que le indica al usuario que el
 	// limite de intentos termino
 	if (cont == 0) {
-		window.location = 'ventana de fallo.html';
+		window.location = 'ventana_de_fallo.html';
 	}
 
 	// Si el email y la contraseña son correctos ambos se llama a la pestaña menu
-	if (emailValido == 2 && passwordValida == 2) {
+	if (emailValido == 2 && credencialesvalidas == 2) {
+		sessionStorage.setItem('glbvalor', username);
 		window.location = './home/menu.html';
+		sessionStorage.setItem('nav', 't');
 	}
 }
 
-// Proseso para la validacion de la contraseña
-function validatePassword(password) {
-	var parejas = obtenerParejas(password);
-	if (password == '') {
-		return false;
-	}
-	for (var i = 0; i < parejas.length; i++) {
-		var numeros = parejas[i].split('');
-		//console.log(numeros)
-		//console.log(numeros[0] % 2)
-		if (numeros[0] % 2 == 0) {
-			// si no es impar
-			if (numeros[0] * 2 == numeros[1]) {
-				return true;
-			}
-		}
-	}
-}
-function validatePass(pass) {
-	if (pass == '') {
-		return false;
-	}
-	let len = pass.length % 2 == 0 ? pass.length : pass.length - 1;
-	let valid = true;
-	for (let i = 0; i < len - 1; i++) {
-		if ((i + 1) % 2 != 0) {
-			const num = parseInt(pass[i]);
-			if (num * 2 != parseInt(pass[i + 1])) {
-				valid = false;
-			}
-		}
-	}
-	return valid;
-}
-function obtenerParejas(password) {
-	return password.match(/..|./g);
-}
+
 
 function bienvenido(username) {}
+
