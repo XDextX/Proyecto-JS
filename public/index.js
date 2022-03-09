@@ -61,9 +61,12 @@ async function login2() {
  * @returns {boolean}
  */
 function validarData(data) {
-	if (data != {}) {
+	if (Object.keys(data).length !== 0) {
 		sessionStorage.setItem('user', JSON.stringify(data));
 		sessionStorage.setItem('nav', 't');
+		test.getData('entrypoints/usuarios/cambiar/acceso',{
+			usuario: data.usuario,
+		});
 		window.location = '/home/menu.html';
 	} else {
 		alert('Credenciales invalidas');

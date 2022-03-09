@@ -1,3 +1,5 @@
+
+
 function reloj() {
 	var actualizarHora = function () {
 		var fecha = new Date(),
@@ -47,5 +49,10 @@ function reloj() {
 
 	var user = JSON.parse(sessionStorage.getItem('user'));
 	document.getElementById('user').innerText = 'Bienvenido' + ' ' + user.usuario;
+	if(user.fechaultimoingreso != null){
+		document.getElementById('fechaultimoingreso').innerHTML = 'Fecha ultimos ingreso:'+' '+ user.fechaultimoingreso;
+
+	}
+	
 }
 reloj();
