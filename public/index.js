@@ -5,7 +5,7 @@ const btnVista = document.getElementById('vista');
 const inputUsername = document.getElementById('user');
 const inputpassword = document.getElementById('pass');
 const validacionEmail =
-	/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+	/^[A-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\.)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?$/;
 //-------------------------------------//
 
 //-------Declaracion de eventos--------//
@@ -39,11 +39,11 @@ async function login2() {
 	let username = inputUsername.value;
 	let password = inputpassword.value;
 	let valid = true;
-	if (!validacionEmail.test(username)) {
+	if (!validacionEmail.test(username.toLowerCase())) {
 		alert('Formato de email invalido');
 		valid = false;
 	} else {
-		let data = await getUser(username, password);
+		let data = await getUser(username.toLowerCase(), password);
 		valid = validarData(data);
 	}
 	if (!valid) {
@@ -61,9 +61,12 @@ async function login2() {
  * @returns {boolean}
  */
 function validarData(data) {
-	if (data != {}) {
+	if (Object.keys(data).length != 0) {
 		sessionStorage.setItem('user', JSON.stringify(data));
 		sessionStorage.setItem('nav', 't');
+		test.getData('/Entrypoints/usuarios/cambiar/acceso', {
+			usuario: data.usuario,
+		});
 		window.location = '/home/menu.html';
 	} else {
 		alert('Credenciales invalidas');

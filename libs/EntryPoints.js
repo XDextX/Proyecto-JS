@@ -44,7 +44,7 @@ router.get('/usuarios', function (req, res) {
 	let { usuario, clave } = req.query;
 	//var usuario = req.query.usuario;
 	//var clave = req.query.clave;
-	var sql = `select  usuario,tipousuario from "USUARIOS"
+	var sql = `select  usuario,tipousuario,fechaultimoingreso from "USUARIOS"
 where usuario='${usuario}' and clave='${clave}'`;
 	pool.connect((err, client, release) => {
 		if (err) {
@@ -61,10 +61,10 @@ where usuario='${usuario}' and clave='${clave}'`;
 	});
 });
 router.get('/usuarios/cambiar/acceso', function (req, res) {
-	let { usuario, clave } = req.query;
+	let { usuario } = req.query;
 	//var usuario = req.query.usuario;
 	//var clave = req.query.clave;
-	var sql = `UPDATE public."USUARIOS" set fechaultimoingreso=now() where clave='Jefferson@gmai.com'`;
+	var sql = `UPDATE public."USUARIOS" set fechaultimoingreso=now() where usuario='${usuario}'`;
 	pool.connect((err, client, release) => {
 		if (err) {
 			res.send(err.stack);
