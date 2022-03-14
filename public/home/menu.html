@@ -2,25 +2,55 @@
 <html>
 	<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
 	<head>
-		<title>PROYECTO</title>
+	
+
+		<link
+			rel="stylesheet"
+			href="/codebase/webix.css"
+			type="text/css"
+			media="screen"
+			charset="utf-8"
+		/>
+		<script
+			src="/codebase/webix.js"
+			type="text/javascript"
+			charset="utf-8"
+		></script>
+		<title>Arturo:Login</title>
 		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<script src="./nav.js"></script>
 	</head>
 	<!-- decoracion del fondo de la pantalla y distribucion de los botones y input -->
 	<body style="background-color: #edbb99">
 		<nav class="navegacion">
-			<a class="navegacion__enlace navegacion__enlace--activo" href="menu.html"
-				>Inicio</a
+			<button
+				class="navegacion__enlace navegacion__enlace--activo"
+				data-href="menu.html"
+				onclick="navigate(this)"
 			>
-			<a class="navegacion__enlace" href="./acerca/nosotros.html">Nosotros</a>
-			<a class="navegacion__enlace" href="#" id="btn_salir">Salir</a>
-			<a>
+				Inicio
+			</button>
+			<button
+				class="navegacion__enlace"
+				data-href="./acerca/nosotros.html"
+				onclick="navigate(this)"
+			>
+				Nosotros
+			</button>
+			<button class="navegacion__enlace" data-href="#" id="btn_salir">
+				Salir
+			</button>
+			<span>
 				<span id="user"></span>
 				<span id="reloj"></span>
-			</a>
+				<span id="fechaultimoingreso"></span>
+			</span>
 		</nav>
 		<div class="widget"></div>
 		<script src="./reloj.js"></script>
 		<script src="./salir.js"></script>
 		<script src="./url-validator.js"></script>
+		
 	</body>
 </html>
