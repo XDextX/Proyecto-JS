@@ -2,7 +2,9 @@ import test from '/test.js';
 const recursos = {
 	form_name: 'login',
 	intentos: 3,
-	url_login: 'entrypoints/usuarios/cambiar/acceso',
+	url_login: 'entrypoints/usuarios',
+	home_page: '/home/menu.html',
+	error_page: 'ventana_de_fallo.html',
 };
 webix.ready(() => {
 	webix.ui({
@@ -32,7 +34,7 @@ function form(config) {
 			{
 				view: 'text',
 				label: 'Ususario',
-				name: 'username',
+				name: 'usuario',
 				placeholder: 'example@example.com',
 				validate: webix.rules.isEmail && webix.rules.isNotEmpty,
 			},
@@ -40,7 +42,7 @@ function form(config) {
 				view: 'text',
 				type: 'password',
 				label: 'Clave',
-				name: 'password',
+				name: 'clave',
 				placeholder: '******',
 				validate: webix.rules.isNotEmpty,
 			},
@@ -70,14 +72,34 @@ function button(config) {
 async function acceder() {
 	if ($$(recursos.form_name).validate()) {
 		let formData = this.getFormView().getValues();
-		data = verificarDatos(formData);
+		console.log(formData);
+		let data = await verificarDatos(formData);
 		if (data) {
 			guardarSession(data);
+			home_page();
 		} else {
 			webix.message('Credenciales invalidas');
+			recursos.intentos--;
 		}
+	} else {
+		webix.message('Campos en rojo incorrectos');
+		recursos.intentos--;
+	}
+	if (recursos.intentos <= 0) {
+		error_page();
 	}
 }
+function home_page() {
+	let page = recursos.home_page;
+	redirect(page);
+}
+function error_page() {
+	redirect(recursos.error_page);
+}
+function redirect(page) {
+	window.location = page;
+}
+
 function guardarSession(data) {
 	sessionStorage.setItem('user', JSON.stringify(data));
 	sessionStorage.setItem('nav', 't');
