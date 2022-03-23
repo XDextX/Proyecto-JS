@@ -1,4 +1,4 @@
-import { getSingleData } from '/test.js';
+import test from '/test.js';
 const recursos = {
 	form_name: 'login',
 	intentos: 3,
@@ -84,6 +84,6 @@ function guardarSession(data) {
 }
 
 async function verificarDatos(formData) {
-	let data = await getSingleData(recursos.url_login, formData);
+	let data = await test.getSingleData(recursos.url_login, formData);
 	return Object.keys(data).length !== 0 ? data : null;
 }
