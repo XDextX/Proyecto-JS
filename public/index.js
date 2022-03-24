@@ -61,12 +61,9 @@ async function login2() {
  * @returns {boolean}
  */
 function validarData(data) {
-	if (Object.keys(data).length !== 0) {
+	if (data != {}) {
 		sessionStorage.setItem('user', JSON.stringify(data));
 		sessionStorage.setItem('nav', 't');
-		test.getData('entrypoints/usuarios/cambiar/acceso',{
-			usuario: data.usuario,
-		});
 		window.location = '/home/menu.html';
 	} else {
 		alert('Credenciales invalidas');
@@ -89,7 +86,7 @@ async function getUser(username, password) {
 }
 
 // Funcion principal de login del programa la cual valida el email y la contraseña
-async function login() {
+function login() {
 	var username = document.getElementById('user').value;
 	var password = document.getElementById('pass').value;
 
@@ -102,24 +99,25 @@ async function login() {
 	// Si es incorrecto alerta al usario y a la consola y la variable llave se vuelve un 1
 	if (!validacionEmail.test(username)) {
 		console.log('Error de email');
-		alert('El formato del email es incorrecta.');
+		alert('La dirección de email es incorrecta.');
 		emailValido = 1;
 	}
 	// Si la contraseña es correcta la guarda en la memoria y la variable llave se vuelve un 2
-	d = await getData('/EntryPoints/demorutina2',{usuario:username, password:password})
-	if (d.length > 0 ) {
-		credencialesvalidas = 2;
+	if (validatePass(password)) {
+		// si es verdadero guardar en memoria
+		console.log('Guardando en memoria...');
+		passwordValida = 2;
 
 		//	Si la contraseña es incorrecta alerta a la consola y al usuario y la variable llave se vuelve un 1
 	} else {
 		console.log('Error de contraseña');
-		alert('Las credenciales son incorrectas');
-		credencialesvalidas = 1;
+		alert('La contraseña es incorrecta.');
+		passwordValida = 1;
 	}
 
 	// Si el email o la contraseña estan erroneas por medio de las llaver se evalua y el contador
 	// disminulle y muestra el numero de intentos restantes
-	if (emailValido == 1 || credencialesvalidas == 1) {
+	if (emailValido == 1 || passwordValida == 1) {
 		cont--;
 	}
 
@@ -137,7 +135,42 @@ async function login() {
 	}
 }
 
-
+// Proseso para la validacion de la contraseña
+function validatePassword(password) {
+	var parejas = obtenerParejas(password);
+	if (password == '') {
+		return false;
+	}
+	for (var i = 0; i < parejas.length; i++) {
+		var numeros = parejas[i].split('');
+		//console.log(numeros)
+		//console.log(numeros[0] % 2)
+		if (numeros[0] % 2 == 0) {
+			// si no es impar
+			if (numeros[0] * 2 == numeros[1]) {
+				return true;
+			}
+		}
+	}
+}
+function validatePass(pass) {
+	if (pass == '') {
+		return false;
+	}
+	let len = pass.length % 2 == 0 ? pass.length : pass.length - 1;
+	let valid = true;
+	for (let i = 0; i < len - 1; i++) {
+		if ((i + 1) % 2 != 0) {
+			const num = parseInt(pass[i]);
+			if (num * 2 != parseInt(pass[i + 1])) {
+				valid = false;
+			}
+		}
+	}
+	return valid;
+}
+function obtenerParejas(password) {
+	return password.match(/..|./g);
+}
 
 function bienvenido(username) {}
-
