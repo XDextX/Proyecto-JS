@@ -25,6 +25,7 @@ async function getData(direction, params = {}) {
 	await webix.ajax(url, (text, data) => {
 		result = JSON.parse(text);
 	});
+	console.log(result);
 	return result;
 }
 async function getSingleData(direction, params = {}) {
