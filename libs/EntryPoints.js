@@ -44,7 +44,7 @@ router.get('/usuarios', function (req, res) {
 	let { usuario, clave } = req.query;
 	//var usuario = req.query.usuario;
 	//var clave = req.query.clave;
-	var sql = `select  usuario,tipousuario,fechaultimoingreso from "USUARIOS"
+	var sql = `select  usuario,tipousuario,fechaultimoingreso,nombre from "USUARIOS"
 where usuario='${usuario}' and clave='${clave}'`;
 	pool.connect((err, client, release) => {
 		if (err) {
