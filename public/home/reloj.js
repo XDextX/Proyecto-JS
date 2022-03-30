@@ -49,10 +49,10 @@ function reloj() {
 
 	var user = JSON.parse(sessionStorage.getItem('user'));
 	document.getElementById('user').innerText = 'Bienvenido' + ' ' + user.usuario;
-	if(user.fechaultimoingreso != null){
-		document.getElementById('fechaultimoingreso').innerHTML = 'Fecha ultimos ingreso:'+' '+ user.fechaultimoingreso;
-
-	}
-	
+	if (user.fechaultimoingreso)
+		document.getElementById('fechaultimoingreso').innerText =
+			'Fecha ultimo ingreso:' +
+			' ' +
+			user.fechaultimoingreso.replace('T', ' ').replace('Z', '');
 }
 reloj();
