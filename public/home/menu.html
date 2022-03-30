@@ -1,74 +1,97 @@
 <!DOCTYPE html>
 <html>
-	<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
-	<head>
-	
+<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
 
-		<link
-			rel="stylesheet"
-			href="/codebase/webix.css"
-			type="text/css"
-			media="screen"
-			charset="utf-8"
-		/>
-		<script
-			src="/codebase/webix.js"
-			type="text/javascript"
-			charset="utf-8"
-		></script>
-		<title>Arturo:Login</title>
-		<meta charset="utf-8" />
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<script src="./nav.js"></script>
-	</head>
-	<!-- decoracion del fondo de la pantalla y distribucion de los botones y input -->
-	<body style="background-color: #7cd7e9">
-		
-		<div id="contenedor_menu" style=" top:0; left:0;"></div>
-		<div id="user" style="margin: 10px; left:0;"></div>
-		<div id="reloj" style="margin: 10px; left:0;"></div>
-		<div id="fechaultimoingreso" style="margin: 10px; left:0;"></div>
+<head>
 
-		<script type="text/javascript" charset="utf-8">
-	webix.ui({
-		container:"contenedor_menu",
-		view:"toolbar",width:1308, paddingY:0,
-		cols:[{view:"menu",
-		with:1325,
-		data:[
-			{ id:"1",value:"Inicio",href:"menu.html", icon:"home"},
-			{ id:"2",value:"Usuarios", icon: "database" },
-			{ id:"3",value:"Acerca de",href: "./acerca/nosotros.html" ,icon: "cube" },
-			{ id:"4",value:"Salir", icon: "cog"}
-		],
-		on:{onMenuItemClick:function(id){
-			var seleccion = this.getMenuItem(id).value;
-			let text;
-			if (seleccion =="Salir" && confirm('Desea salir?') == true){
-				text = 'You pressed OK!';
-			sessionStorage.removeItem('user');
-			window.location = '../index.html';
-			} else {
-			ext = 'You canceled!';
+
+	<link rel="stylesheet" href="/codebase/webix.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>Arturo:Login</title>
+	<meta charset="utf-8" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<script src="./nav.js"></script>
+	<script src="./reloj.js"></script>
+</head>
+<!-- decoracion del fondo de la pantalla y distribucion de los botones y input -->
+
+<body style="background-color: #7cd7e9">
+
+	<div id="contenedor_menu" style=" top:0; left:0;"></div>
+	<div id="user" style="margin: 10px; left:0;"></div>
+	<div id="reloj" style="margin: 10px; left:0;"></div>
+	<div id="fechaultimoingreso" style="margin: 10px; left:0;"></div>
+
+	<script type="text/javascript" charset="utf-8">
+		webix.ui({
+			container: "contenedor_menu",
+			view: "toolbar", width: 1308, paddingY: 0,
+			cols: [{
+				view: "menu",
+				with: 1325,
+				data: [
+					{ id: "1", value: "Inicio", icon: "home" },
+					{ id: "2", value: "Usuarios", icon: "database" },
+					{ id: "3", value: "Acerca de", icon: "cube" },
+					{ id: "4", value: "Salir", icon: "cog" },
+					{ id: "user", value: datos.usuario },
+					{ id: "reloj", value: datos.Date },
+					{ id: "fechaultimoingreso", value: datos.fechaultimoingreso }
+				],
+				on: {
+					onMenuItemClick: function (id) {
+						var seleccion = this.getMenuItem(id).value;
+						let text;
+						if (seleccion == "Salir" && confirm('Desea salir?') == true) {
+							text = 'You pressed OK!';
+							sessionStorage.removeItem('user');
+							window.location = '../index.html';
+						} else {
+							ext = 'You canceled!';
+						}
+						switch (seleccion) {
+							case "Usuarios":
+
+								break;
+							case "Inicio":
+								navegar("menu.html")
+								break;
+							case "Acerca de":
+								navegar("./acerca/nosotros.html")
+								break;
+
+							default:
+								break;
+						}
+					}
 				}
 			}
-		}}
-]});
-	
-		 
-	
+
+			]
+		});
+
+		function navegar(url) {
+			sessionStorage.setItem("nav", "t")
+			window.location = url
+		}
 
 
+
+
+
+
+
+
+
+	</script>
+
+
+
 	
-		
-	
-</script>
-		
-		
-		
-		<script src="./reloj.js"></script>
-		<script src="./salir.js"></script>
-		
-		
-	</body>
+	<script src="./salir.js"></script>
+	<script src="./url-validator.js"></script>
+
+
+</body>
+
 </html>
