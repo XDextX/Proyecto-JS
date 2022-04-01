@@ -34,10 +34,10 @@ webix.ui({
 						case 'Usuarios':
 							break;
 						case 'Inicio':
-							navegar('menu.html');
+							navegar('/home/menu.html');
 							break;
 						case 'Acerca de':
-							navegar('./acerca/nosotros.html');
+							navegar('/home/acerca/nosotros.html');
 							break;
 
 						default:
