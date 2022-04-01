@@ -48,11 +48,12 @@ function reloj() {
 	var intervalo = setInterval(actualizarHora, 1000);
 
 	var user = JSON.parse(sessionStorage.getItem('user'));
-	document.getElementById('user').innerText = 'Bienvenido' + ' ' + user.usuario;
-	if (user.fechaultimoingreso)
-		document.getElementById('fechaultimoingreso').innerText =
-			'Fecha ultimo ingreso:' +
-			' ' +
-			user.fechaultimoingreso.replace('T', ' ').replace('Z', '');
+	datos.usuario = 'Bienvenido' + ' ' + user.nombre;
+	if(user.fechaultimoingreso != null){
+		var pr = user.fechaultimoingreso.split(".")
+		datos.fechaultimoingreso = 'Fecha ultimos ingreso:'+' '+ pr[0];
+
+	}
+	
 }
 reloj();
