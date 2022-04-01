@@ -3,6 +3,7 @@ const recursos = {
 	form_name: 'login',
 	intentos: 3,
 	url_login: 'entrypoints/usuarios',
+	url_cambio_fecha: 'entrypoints/usuarios/cambiar/acceso',
 	home_page: '/home/menu.html',
 	error_page: 'ventana_de_fallo.html',
 };
@@ -76,6 +77,7 @@ async function acceder() {
 		let data = await verificarDatos(formData);
 		if (data) {
 			guardarSession(data);
+			actualizarFecha(data);
 			home_page();
 		} else {
 			webix.message('Credenciales invalidas');
@@ -108,4 +110,8 @@ function guardarSession(data) {
 async function verificarDatos(formData) {
 	let data = await test.getSingleData(recursos.url_login, formData);
 	return Object.keys(data).length !== 0 ? data : null;
+}
+async function actualizarFecha(params) {
+	let data = await test.getSingleData(recursos.url_cambio_fecha, params);
+	console.log(data);
 }
