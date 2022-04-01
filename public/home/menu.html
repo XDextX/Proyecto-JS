@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<!-- Proyecto de login por Andres Monestel, Jose Pablo Monestel, Jefferson Soto, German Montero y David Gutiérrez -->
-	<head>
-	
 
+	<head>
 		<link
 			rel="stylesheet"
 			href="/codebase/webix.css"
@@ -20,37 +19,15 @@
 		<meta charset="utf-8" />
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script src="./nav.js"></script>
+		<script src="./reloj.js"></script>
 	</head>
 	<!-- decoracion del fondo de la pantalla y distribucion de los botones y input -->
-	<body style="background-color: #edbb99">
-		<nav class="navegacion">
-			<button
-				class="navegacion__enlace navegacion__enlace--activo"
-				data-href="menu.html"
-				onclick="navigate(this)"
-			>
-				Inicio
-			</button>
-			<button
-				class="navegacion__enlace"
-				data-href="./acerca/nosotros.html"
-				onclick="navigate(this)"
-			>
-				Nosotros
-			</button>
-			<button class="navegacion__enlace" data-href="#" id="btn_salir">
-				Salir
-			</button>
-			<span>
-				<span id="user"></span>
-				<span id="reloj"></span>
-				<span id="fechaultimoingreso"></span>
-			</span>
-		</nav>
-		<div class="widget"></div>
-		<script src="./reloj.js"></script>
+
+	<body style="background-color: #7cd7e9">
+		<div id="contenedor_menu"></div>
+		<script src="/menu.js"></script>
+
 		<script src="./salir.js"></script>
 		<script src="./url-validator.js"></script>
-		
 	</body>
 </html>
