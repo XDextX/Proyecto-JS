@@ -32,7 +32,7 @@ webix.ui({
 					}
 					switch (seleccion) {
 						case 'Usuarios':
-							navegar("tabla.html")
+							navegar('/home/tabla.html');
 							break;
 						case 'Inicio':
 							navegar('/home/menu.html');
