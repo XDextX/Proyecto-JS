@@ -1,6 +1,6 @@
 let count = 0;
 import test from "../test.js";
-let data = await test.getSingleData('/EntryPoins/usuarios/all')
+let data = await test.getSingleData('/EntryPoints/usuarios/all')
 
 
 const grid1 = {
@@ -8,14 +8,14 @@ const grid1 = {
     id:"grid",
     columns:[
       { id:"usuario", headermenu:false,	header:"Usuarios", fillspace:true },
-      { id:"nombre", header:"Nombre", width:100 },
-      { id:"apellido", header:"Apellido", width:100 },
-      { id:"fechaultimoingreso", header:"UltimaConexion", width:120 },
+      { id:"nombre", header:"Nombre", fillspace:true },
+      { id:"apellido", header:"Apellido", fillspace:true },
+      { id:"fechaultimoingreso", header:"UltimaConexion", fillspace:true },
       { header:{ content:"headerMenu" }, headermenu:false, width:35 }
     ],
     autoheight:true,
     scrollX: false,
-    data: []
+    url: '/EntryPoints/usuarios/all'
   };
   
   webix.ready(function(){

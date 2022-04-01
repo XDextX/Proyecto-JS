@@ -11,7 +11,7 @@ const pool = new Pool({
 	password: '1234',
 	database: 'ArturoDB',
 	host: 'localhost',
-	port: 5433,
+	port: 5432,
 	max: 20,
 	idleTimeoutMillis: 30000,
 	connectionTimeoutMillis: 2000,
