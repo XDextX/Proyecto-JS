@@ -51,7 +51,7 @@ function reloj() {
 	datos.usuario = 'Bienvenido' + ' ' + user.nombre;
 	if(user.fechaultimoingreso != null){
 		var pr = user.fechaultimoingreso.split(".")
-		datos.fechaultimoingreso = 'Fecha ultimos ingreso:'+' '+ pr[0];
+		datos.fechaultimoingreso = 'Fecha ultimo ingreso:'+' '+ pr[0];
 
 	}
 	
