@@ -78,8 +78,3 @@ $$('imageList').attachEvent('onItemClick', function (id) {
 $$('carousel').attachEvent('onShow', function (id) {
 	$$('imageList').select(id);
 });
-let data = await test.getSingleData('/entrypoints/usuarios/all', {
-	usuario: 'acassidyg@wufoo.com',
-	clave: '3xAs67Rh',
-});
-console.log(data);
