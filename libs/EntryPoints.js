@@ -25,7 +25,7 @@ const pool = new Pool({
 
 router.get('/usuarios/all', function (req, res) {
 	var sql = 'select * from public."USUARIOS"';
-
+	print_query(req);
 	pool.connect((err, client, release) => {
 		if (err) {
 			res.send(err.stack);
@@ -42,9 +42,10 @@ router.get('/usuarios/all', function (req, res) {
 });
 router.get('/usuarios', function (req, res) {
 	let { usuario, clave } = req.query;
+	print_query(req);
 	//var usuario = req.query.usuario;
 	//var clave = req.query.clave;
-	var sql = `select  usuario,tipousuario,fechaultimoingreso from "USUARIOS"
+	var sql = `select  usuario,tipousuario,fechaultimoingreso,nombre from "USUARIOS"
 where usuario='${usuario}' and clave='${clave}'`;
 	pool.connect((err, client, release) => {
 		if (err) {
@@ -61,7 +62,8 @@ where usuario='${usuario}' and clave='${clave}'`;
 	});
 });
 router.get('/usuarios/cambiar/acceso', function (req, res) {
-	let { usuario, clave } = req.query;
+	let { usuario } = req.query;
+	print_query(req);
 	//var usuario = req.query.usuario;
 	//var clave = req.query.clave;
 	var sql = `UPDATE public."USUARIOS" set fechaultimoingreso=now() where usuario='${usuario}'`;
@@ -81,6 +83,7 @@ router.get('/usuarios/cambiar/acceso', function (req, res) {
 });
 router.get('/usuarios/acceso', function (req, res) {
 	let { usuario, clave } = req.query;
+	print_query(req);
 	//var usuario = req.query.usuario;
 	//var clave = req.query.clave;
 	var sql = `select fechaultimoingreso from public."USUARIOS" where usuario='${usuario}'`;
@@ -98,6 +101,10 @@ router.get('/usuarios/acceso', function (req, res) {
 		});
 	});
 });
+
+function print_query(req) {
+	console.log(req.path, req.query);
+}
 // ==============================================
 
 // ===============================================================END ENTRY POINT DIVISION =================================================
